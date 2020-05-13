@@ -37,5 +37,9 @@ namespace EventosTec.Web.Models.Entities
         [ForeignKey("CityId")]
         public City City { get; set; }
 
+        [Required]
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
     }
 }
