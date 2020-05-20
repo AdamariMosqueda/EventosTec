@@ -1,4 +1,5 @@
-﻿using EventosTec.Web.Models.Entities;
+﻿using EventosTec.Web.Models;
+using EventosTec.Web.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventosTec.Web.Data.Helpers
 {
-    interface IUserHelper
+    public interface IUserHelper
     {
         Task<User> GetUserByEMailAsync(string email);
         Task<IdentityResult> AddUserAssync(User user, string Password);
@@ -18,3 +19,4 @@ namespace EventosTec.Web.Data.Helpers
 
     }
 }
+    

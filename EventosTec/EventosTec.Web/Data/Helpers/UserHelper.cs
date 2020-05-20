@@ -14,7 +14,7 @@ namespace EventosTec.Web.Data.Helpers
         public UserHelper(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
+            _roleManager = roleManager;     
 
         }
         public async Task<IdentityResult> AddUserAssync(User user, string Password)
