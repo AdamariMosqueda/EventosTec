@@ -16,5 +16,7 @@ namespace EventosTec.Web.Models.Entities
 
         [Display(Name = "Descripción")]
         public string Description { get; set; }
+
+        public ICollection<Event> Events { get; set; }
     }
 }
