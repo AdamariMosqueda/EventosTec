@@ -24,7 +24,7 @@ namespace EventosTec.Web.Controllers
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clities.ToListAsync());
+            return View(await _context.Clities.Include(e => e.Events).ToListAsync());
         }
 
         // GET: Cities/Details/5
