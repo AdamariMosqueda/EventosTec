@@ -35,7 +35,7 @@ namespace EventosTec.Web.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories.Include(a => a.Events)
+            var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
