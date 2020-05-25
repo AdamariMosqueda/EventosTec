@@ -35,7 +35,7 @@ namespace EventosTec.Web.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Clities
+            var city = await _context.Clities.Include(a => a.Events)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (city == null)
             {
