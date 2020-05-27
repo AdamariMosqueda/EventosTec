@@ -36,7 +36,6 @@ namespace EventosTec.Web.Models.Entities
         public City City { get; set; }
 
         public int ClientId { get; set; }
-        [ForeignKey("ClientId")]
         public Client Client { get; set; }
 
         public int CategoryId { get; set; }

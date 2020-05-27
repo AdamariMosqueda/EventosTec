@@ -4,9 +4,11 @@
     ViewData["Title"] = "CreateEvent";
 }
 
-<h2>CreateEvent</h2>
-
-<h4>Event</h4>
+<h2 class="text-center">Crea tu evento</h2>
+<div align="center">
+    <img src="https://pngimage.net/wp-content/uploads/2018/06/icono-escribir-png.png"
+         width="100" height="100">
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -48,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ClientId" class="control-label"></label>
-                <select name="ClienteId" class="form-control">
+                <select asp-for="ClientId" class="form-control">
                     <option>Elige un Cliente</option>
                     @foreach (var item in ViewBag.ClientId)
                     {
@@ -62,12 +64,16 @@
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Regresar</a>
+    <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
