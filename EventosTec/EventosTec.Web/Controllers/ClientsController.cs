@@ -39,7 +39,7 @@ namespace EventosTec.Web.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
+            var client = await _context.Clients.Include(u=>u.User).Include(e=>e.Events)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (client == null)
             {

@@ -52,11 +52,22 @@ namespace EventosTec.Web.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            var username = User.Identity.Name;
+            var userid = _context.Clients.Where(a => a.User.Email == username).FirstOrDefault();
+            ViewBag.ClientId = userid.Id;
             ViewData["CityId"] = new SelectList(_context.Clities, "Id", "Name");
-            ViewData["ClientId"] = new SelectList(_context.Clients, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
+
+        public IActionResult CreateEvent()
+        {
+            ViewBag.ClientId = _context.Clients.Include(u => u.User).ToList();
+            ViewData["CityId"] = new SelectList(_context.Clities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            return View();
+        }
+
 
         // POST: Events/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
