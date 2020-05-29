@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EventosTec.Web.Models;
 using EventosTec.Web.Models.Entities;
+using EventosTec.Web.Models.ModelApi;
+using EventosTec.Web.Models.ModelAPI;
 
 namespace EventosTec.Web.Controllers.API
 {
@@ -37,14 +39,33 @@ namespace EventosTec.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
-            var city = await _context.Clities.FindAsync(id);
-
+            var city = await _context.Clities.Include(a => a.Events)
+                .FirstOrDefaultAsync(a => a.Id == id);
+            var response = new CityResponse
+            {
+                Description = city.Description,
+                Name = city.Name,
+                Id = city.Id,
+                Slung = city.Slung,
+                Events = city.Events.Select(
+                    p => new EventResponse
+                    {
+                        Description = p.Description,
+                        Name = p.Name,
+                        Id = p.Id,
+                        Duration = p.Duration,
+                        People = p.People,
+                        Picture = p.Picture,
+                        EventDate = p.EventDate
+                    }
+                    ).ToList(),
+            };
             if (city == null)
             {
                 return NotFound();
             }
 
-            return Ok(city);
+            return Ok(response);
         }
 
         // PUT: api/Cities/5
