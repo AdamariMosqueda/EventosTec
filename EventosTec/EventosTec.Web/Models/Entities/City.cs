@@ -20,9 +20,5 @@ namespace EventosTec.Web.Models.Entities
 
         public ICollection<Event> Events { get; set; }
 
-        internal string Select(Func<object, CityResponse> p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

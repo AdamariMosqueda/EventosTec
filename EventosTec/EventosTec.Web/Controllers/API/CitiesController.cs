@@ -9,11 +9,14 @@ using EventosTec.Web.Models;
 using EventosTec.Web.Models.Entities;
 using EventosTec.Web.Models.ModelApi;
 using EventosTec.Web.Models.ModelAPI;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace EventosTec.Web.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CitiesController : ControllerBase
     {
         private readonly DataDbContext _context;
