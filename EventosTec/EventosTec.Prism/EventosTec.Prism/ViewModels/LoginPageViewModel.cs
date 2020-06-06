@@ -4,7 +4,8 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using EventosTec.Library.Service;
+using EventosTec.Library.Model;
 namespace EventosTec.Prism.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
@@ -13,12 +14,14 @@ namespace EventosTec.Prism.ViewModels
         private bool isrunning;
         private bool isenabled;
         private DelegateCommand logincommand;
+        private readonly IApiServices apiservice;
 
-        public LoginPageViewModel(INavigationService navigationService)
+        public LoginPageViewModel(INavigationService navigationService, IApiServices apiServices)
             : base(navigationService)
         {
             Title = "Login";
             IsEnabled = true;
+            apiservice = apiServices;
 
         }
 
@@ -37,7 +40,30 @@ namespace EventosTec.Prism.ViewModels
                 return;
             }
 
+            IsRunning = true;
+            IsEnabled = false;
+            var request = new TokenRequest()
+            {
+                Password = password,
+                Username = Email,
+
+            };
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+
+            var response = await apiservice.GetTokenAsync(url, "/Account", "/CreateToken", request);
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Contraseña o Usuario Incorrectos", "Accept");
+                Password = string.Empty;
+                return;
+            }
+            IsRunning = false;
+            IsEnabled = true;
+
             await App.Current.MainPage.DisplayAlert("Ok", "Ya entre", "Accept");
+
         }
 
         public string Email { get; set; }

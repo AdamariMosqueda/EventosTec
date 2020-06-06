@@ -6,6 +6,7 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using EventosTec.Library.Service;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace EventosTec.Prism
@@ -31,9 +32,9 @@ namespace EventosTec.Prism
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.Register<IApiServices, ApiServices>();
         }
     }
 }

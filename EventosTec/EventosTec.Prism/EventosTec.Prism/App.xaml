@@ -6,6 +6,9 @@
   <Application.Resources>
 
     <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <x:String x:Key="UrlAPI">https://localhost:44332</x:String>
+        </ResourceDictionary>
 
-  </Application.Resources>
+    </Application.Resources>
 </prism:PrismApplication>
